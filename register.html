@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartTech - Register/Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #282c34;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #40454f;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        nav a:hover {
+            background-color: #575d69;
+            border-radius: 4px;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #282c34;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container form button:hover {
+            background-color: #40454f;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const email = document.forms["registerForm"]["email"].value;
+            const password = document.forms["registerForm"]["password"].value;
+            const confirmPassword = document.forms["registerForm"]["confirmPassword"].value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            let valid = true;
+            let errorMessage = "";
+
+            if (!emailPattern.test(email)) {
+                errorMessage += "Invalid email format.<br>";
+                valid = false;
+            }
+            if (!passwordPattern.test(password)) {
+                errorMessage += "Password must be at least 8 characters long and contain both letters and numbers.<br>";
+                valid = false;
+            }
+            if (password !== confirmPassword) {
+                errorMessage += "Passwords do not match.<br>";
+                valid = false;
+            }
+
+            document.getElementById("error-message").innerHTML = errorMessage;
+            return valid;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>SmartTech</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="product page.html">Products</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="register.html">Register/Login</a>
+    </nav>
+    <div class="container form-container" id="register">
+        <h2>Register/Login</h2>
+        <div id="error-message" class="error-message"></div>
+        <form name="registerForm" onsubmit="return validateForm()">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+            <button type="submit">Register/Login</button>
+        </form>
+    </div>
+</body>
+</html>
